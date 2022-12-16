@@ -1,44 +1,50 @@
-=== Menu Item Visibility Control ===
-Contributors: shazdeh
-Plugin Name: Menu Item Visibility Control
+=== Menu Logic ===
+Contributors: shazdeh, paulkirspuu, lulech23
+Plugin Name: Menu Logic
 Tags: menu, nav-menu, navigation, navigation menu, conditional tags, context, filter
 Requires at least: 5.4
-Tested up to: 5.7.1
-Stable tag: 0.4
+Tested up to: 6.0.1
+Stable tag: 0.5.1
 
 Control individual menu items' visibility based on your desired condition.
 
 == Description ==
 
-Using this plugin you can use WordPress <a href="http://codex.wordpress.org/Conditional_Tags">Conditional Tags</a> to enable or disable menu items on the front-end. It works like 'Widget Logic' but for menu items.
+Using this plugin you can use WordPress <a href="http://codex.wordpress.org/Conditional_Tags">Conditional Tags</a> to enable or disable menu items on the front-end. It works like "Widget Logic" but for menu items.
+
+*PLEASE NOTE*: The conditions are PHP codes that are evaluated using PHP's "<a href="https://www.php.net/manual/en/function.eval.php">eval</a>" function, meaning anyone who has access to the Menu manager in WordPress can execute any code. Be mindful of who has access to the Menu manager.
 
 = Usage =
-You must insert conditional tags in the "Visibility" box in the menu item options form. You can use any PHP or WordPress functions to build crazy conditions and logics for menu items. For example, to hide the menu item on homepage you can set the visibility to:
-<pre><code>! is_home()</code></pre>
+You must insert conditional tags in the "Menu Logic" box in the menu item options form. You can use any PHP or WordPress functions to build virtually any condition for menu items. For example, to hide the menu item on homepage you can set the visibility to:
+<pre><code>!is_home()</code></pre>
 
 Show the menu only to logged-in users: 
 <pre><code>is_user_logged_in()</code></pre>
 
 Show the menu only to guest visitors: 
-<pre><code>! is_user_logged_in()</code></pre>
+<pre><code>!is_user_logged_in()</code></pre>
 
 To show the menu item based on <a href="https://wordpress.org/support/article/roles-and-capabilities/">user capability</a>:
-<pre><code>current_user_can( 'manage_options' )</code></pre>
+<pre><code>current_user_can('manage_options')</code></pre>
 
 
 == Installation ==
 
-1. Upload the `menu-item-visibility` directory to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Locate the 'Menus' item on the 'Appearance' menu
-4. While editing your menu item, you see another option: Visibility, input your logic and that's it.
-
-
-== Screenshots ==
-1. Visibility Control
+1. Upload the `menu-logic` directory to the `/wp-content/plugins/` directory
+2. Activate the plugin through the "Plugins" menu in WordPress
+3. Locate the "Menus" item on the "Appearance" menu
+4. While editing your menu item, you will see another option, "Menu Logic" - input your logic and that's it
 
 
 == Changelog ==
+
+= 0.5.1 =
+* Merged code structure from CXL fork while preserving original functionality
+* Renamed to Menu Logic for consistency with similar plugins
+* Added logic check when updating menu items - WordPress will display an error upon saving malformatted code
+
+= 0.5 =
+* Fix error handler in php8
 
 = 0.4 =
 * Improve error handling
@@ -53,7 +59,7 @@ To show the menu item based on <a href="https://wordpress.org/support/article/ro
 * Fix JS error on Menus manager
 
 = 0.3.6 =
-* Revamp of how fields are added to WP UI, should prevent conflict with other plugins and themes.
+* Revamp of how fields are added to WP UI, should prevent conflict with other plugins and themes
 
 = 0.3.5 =
 * Possible fatal error prevention
